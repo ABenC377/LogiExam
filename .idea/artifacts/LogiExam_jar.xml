@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="LogiExam:jar">
+    <output-path>$PROJECT_DIR$/../LogiExam/artifacts/LogiExam_jar</output-path>
+    <root id="archive" name="LogiExam.jar">
+      <element id="module-output" name="circuit-code-r256-trunk" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/MRJAdapter.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/fontchooser.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jh.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/colorpicker.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/scripts/data/javahelp/lib/jhbasic.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/scripts/data/javahelp/lib/jh.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/scripts/data/javahelp/lib/jsearch.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/scripts/data/javahelp/lib/jhall.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
