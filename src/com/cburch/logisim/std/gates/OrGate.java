@@ -5,8 +5,6 @@ package com.cburch.logisim.std.gates;
 
 import java.awt.Graphics;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.Instance;
 import com.cburch.logisim.instance.InstancePainter;
@@ -55,14 +53,6 @@ class OrGate extends AbstractGate {
 		return ret;
 	}
 
-	@Override
-	protected Expression computeExpression(Expression[] inputs, int numInputs) {
-		Expression ret = inputs[0];
-		for (int i = 1; i < numInputs; i++) {
-			ret = Expressions.or(ret, inputs[i]);
-		}
-		return ret;
-	}
 
 	@Override
 	protected Value getIdentity() { return Value.FALSE; }

@@ -3,8 +3,6 @@
 
 package com.cburch.logisim.std.gates;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -39,14 +37,6 @@ class EvenParityGate extends AbstractGate {
 		return GateFunctions.computeOddParity(inputs, numInputs).not();
 	}
 
-	@Override
-	protected Expression computeExpression(Expression[] inputs, int numInputs) {
-		Expression ret = inputs[0];
-		for (int i = 1; i < numInputs; i++) {
-			ret = Expressions.xor(ret, inputs[i]);
-		}
-		return Expressions.not(ret);
-	}
 
 	@Override
 	protected Value getIdentity() { return Value.FALSE; }

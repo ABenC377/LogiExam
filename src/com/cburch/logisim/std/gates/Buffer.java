@@ -8,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Map;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.circuit.ExpressionComputer;
 import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.AttributeSet;
 import com.cburch.logisim.data.BitWidth;
@@ -91,20 +89,6 @@ class Buffer extends InstanceFactory {
 		instance.setPorts(ports);
 	}
 
-	@Override
-	public Object getInstanceFeature(final Instance instance, Object key) {
-		if (key == ExpressionComputer.class) {
-			return new ExpressionComputer() {
-				public void computeExpression(Map<Location,Expression> expressionMap) {
-					Expression e = expressionMap.get(instance.getPortLocation(1));
-					if (e != null) {
-						expressionMap.put(instance.getPortLocation(0), e);
-					}
-				}
-			};
-		}
-		return super.getInstanceFeature(instance, key);
-	}
 		
 	//
 	// painting methods

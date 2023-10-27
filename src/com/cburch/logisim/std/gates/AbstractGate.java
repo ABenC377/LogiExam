@@ -11,9 +11,6 @@ import java.util.Map;
 import javax.swing.Icon;
 
 import com.cburch.logisim.LogisimVersion;
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
-import com.cburch.logisim.circuit.ExpressionComputer;
 import com.cburch.logisim.comp.TextField;
 import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.AttributeSet;
@@ -345,8 +342,6 @@ abstract class AbstractGate extends InstanceFactory {
 	protected abstract Value computeOutput(Value[] inputs, int numInputs,
 			InstanceState state);
 	
-	protected abstract Expression computeExpression(Expression[] inputs,
-			int numInputs);
 
 	protected boolean shouldRepairWire(Instance instance, WireRepairData data) {
 		return false;
@@ -481,33 +476,6 @@ abstract class AbstractGate extends InstanceFactory {
 			return new WireRepair() {
 				public boolean shouldRepairWire(WireRepairData data) {
 					return AbstractGate.this.shouldRepairWire(instance, data);
-				}
-			};
-		}
-		if (key == ExpressionComputer.class) {
-			return new ExpressionComputer() {
-				public void computeExpression(Map<Location,Expression> expressionMap) {
-					GateAttributes attrs = (GateAttributes) instance.getAttributeSet();
-					int inputCount = attrs.inputs;
-					int negated = attrs.negated;
-	
-					Expression[] inputs = new Expression[inputCount];
-					int numInputs = 0;
-					for (int i = 1; i <= inputCount; i++) {
-						Expression e = expressionMap.get(instance.getPortLocation(i));
-						if (e != null) {
-							int negatedBit = (negated >> (i - 1)) & 1;
-							if (negatedBit == 1) {
-								e = Expressions.not(e);
-							}
-							inputs[numInputs] = e;
-							++numInputs;
-						}
-					}
-					if (numInputs > 0) {
-						Expression out = AbstractGate.this.computeExpression(inputs, numInputs);
-						expressionMap.put(instance.getPortLocation(0), out);
-					}
 				}
 			};
 		}

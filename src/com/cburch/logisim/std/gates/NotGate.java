@@ -10,9 +10,6 @@ import java.util.Map;
 
 import javax.swing.Icon;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
-import com.cburch.logisim.circuit.ExpressionComputer;
 import com.cburch.logisim.comp.TextField;
 import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.AttributeOption;
@@ -128,16 +125,7 @@ class NotGate extends InstanceFactory {
 	
 	@Override
 	protected Object getInstanceFeature(final Instance instance, Object key) {
-		if (key == ExpressionComputer.class) {
-			return new ExpressionComputer() {
-				public void computeExpression(Map<Location,Expression> expressionMap) {
-					Expression e = expressionMap.get(instance.getPortLocation(1));
-					if (e != null) {
-						expressionMap.put(instance.getPortLocation(0), Expressions.not(e));
-					}
-				}
-			};
-		}
+		
 		return super.getInstanceFeature(instance, key);
 	}
 	

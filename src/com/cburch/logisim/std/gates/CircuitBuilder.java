@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import com.cburch.logisim.analyze.model.AnalyzerModel;
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.VariableList;
 import com.cburch.logisim.circuit.Circuit;
 import com.cburch.logisim.circuit.CircuitMutation;
 import com.cburch.logisim.circuit.Wire;
@@ -28,53 +25,6 @@ import com.cburch.logisim.std.wiring.Pin;
 public class CircuitBuilder {
 	private CircuitBuilder() { }
 	
-	public static CircuitMutation build(Circuit destCirc, AnalyzerModel model,
-			boolean twoInputs, boolean useNands) {
-		CircuitMutation result = new CircuitMutation(destCirc);
-		result.clear();
-		
-		Layout[] layouts = new Layout[model.getOutputs().size()];
-		int maxWidth = 0;
-		for (int i = 0; i < layouts.length; i++) {
-			String output = model.getOutputs().get(i);
-			Expression expr = model.getOutputExpressions().getExpression(output);
-			CircuitDetermination det = CircuitDetermination.create(expr);
-			if (det != null) {
-				if (twoInputs) det.convertToTwoInputs();
-				if (useNands) det.convertToNands();
-				det.repair();
-				layouts[i] = layoutGates(det);
-				maxWidth = Math.max(maxWidth, layouts[i].width);
-			} else {
-				layouts[i] = null;
-			}
-		}
-		
-		InputData inputData = computeInputData(model);
-		int x = inputData.getStartX();
-		int y = 10;
-		int outputX = x + maxWidth + 20;
-		for (int i = 0; i < layouts.length; i++) {
-			String outputName = model.getOutputs().get(i);
-			Layout layout = layouts[i];
-			Location output;
-			int height;
-			if (layout == null) {
-				output = Location.create(outputX, y + 20);
-				height = 40;
-			} else {
-				int dy = 0;
-				if (layout.outputY < 20) dy = 20 - layout.outputY;
-				height = Math.max(dy + layout.height, 40);
-				output = Location.create(outputX, y + dy + layout.outputY);
-				placeComponents(result, layouts[i], x, y + dy, inputData, output);
-			}
-			placeOutput(result, output, outputName);
-			y += height + 10;
-		}
-		placeInputs(result, inputData);
-		return result;
-	}
 
 	//
 	// layoutGates
@@ -253,20 +203,6 @@ public class CircuitBuilder {
 	//
 	// computeInputData
 	//
-	private static InputData computeInputData(AnalyzerModel model) {
-		InputData ret = new InputData();
-		VariableList inputs = model.getInputs();
-		int spineX = 60;
-		ret.names = new String[inputs.size()];
-		for (int i = 0; i < inputs.size(); i++) {
-			String name = inputs.get(i);
-			ret.names[i] = name;
-			ret.inputs.put(name, new SingleInput(spineX));
-			spineX += 20;
-		}
-		ret.startX = spineX;
-		return ret;
-	}
 	
 	private static class InputData {
 		int startX;

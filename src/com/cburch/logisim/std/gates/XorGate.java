@@ -5,8 +5,6 @@ package com.cburch.logisim.std.gates;
 
 import java.awt.Graphics;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
 import com.cburch.logisim.data.AttributeSet;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.Instance;
@@ -75,22 +73,8 @@ class XorGate extends AbstractGate {
 		return !data.getPoint().equals(instance.getLocation());
 	}
 
-	@Override
-	protected Expression computeExpression(Expression[] inputs, int numInputs) {
-		return xorExpression(inputs, numInputs);
-	}
 
 	@Override
 	protected Value getIdentity() { return Value.FALSE; }
 	
-	protected static Expression xorExpression(Expression[] inputs, int numInputs) {
-		if (numInputs > 2) {
-			throw new UnsupportedOperationException("XorGate");
-		}
-		Expression ret = inputs[0];
-		for (int i = 1; i < numInputs; i++) {
-			ret = Expressions.xor(ret, inputs[i]);
-		}
-		return ret;
-	}
 }

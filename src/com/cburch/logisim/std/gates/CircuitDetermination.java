@@ -5,8 +5,6 @@ package com.cburch.logisim.std.gates;
 
 import java.util.ArrayList;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.ExpressionVisitor;
 import com.cburch.logisim.comp.ComponentFactory;
 
 /** This represents the actual gate selection used corresponding
@@ -194,83 +192,6 @@ abstract class CircuitDetermination {
 		int getValue() { return value; }
 	}
 	
-	static CircuitDetermination create(Expression expr) {
-		if (expr == null) return null;
-		return expr.visit(new Determine());
-	}
 	
-	private static class Determine
-			implements ExpressionVisitor<CircuitDetermination> {
-		public CircuitDetermination visitAnd(Expression a, Expression b) {
-			return binary(a.visit(this), b.visit(this), AndGate.FACTORY);
-		}
-
-		public CircuitDetermination visitOr(Expression a, Expression b) {
-			return binary(a.visit(this), b.visit(this), OrGate.FACTORY);
-		}
-
-		public CircuitDetermination visitXor(Expression a, Expression b) {
-			return binary(a.visit(this), b.visit(this), XorGate.FACTORY);
-		}
-		
-		private Gate binary(CircuitDetermination aret,
-				CircuitDetermination bret, ComponentFactory factory) {
-			if (aret instanceof Gate) {
-				Gate a = (Gate) aret;
-				if (a.factory == factory) {
-					if (bret instanceof Gate) {
-						Gate b = (Gate) bret;
-						if (b.factory == factory) {
-							a.inputs.addAll(b.inputs);
-							return a;
-						}
-					}
-					a.inputs.add(bret);
-					return a;
-				}
-			}
-			
-			if (bret instanceof Gate) {
-				Gate b = (Gate) bret;
-				if (b.factory == factory) {
-					b.inputs.add(aret);
-					return b;
-				}
-			}
-			
-			Gate ret = new Gate(factory);
-			ret.inputs.add(aret);
-			ret.inputs.add(bret);
-			return ret;
-		}
-
-		public CircuitDetermination visitNot(Expression aBase) {
-			CircuitDetermination aret = aBase.visit(this);
-			if (aret instanceof Gate) {
-				Gate a = (Gate) aret;
-				if (a.factory == AndGate.FACTORY) {
-					a.factory = NandGate.FACTORY;
-					return a;
-				} else if (a.factory == OrGate.FACTORY) {
-					a.factory = NorGate.FACTORY;
-					return a;
-				} else if (a.factory == XorGate.FACTORY) {
-					a.factory = XnorGate.FACTORY;
-					return a;
-				}
-			}
-			
-			Gate ret = new Gate(NotGate.FACTORY);
-			ret.inputs.add(aret);
-			return ret;
-		}
-
-		public CircuitDetermination visitVariable(String name) {
-			return new Input(name);
-		}
-
-		public CircuitDetermination visitConstant(int value) {
-			return new Value(value);
-		}           
-	}
+	
 }

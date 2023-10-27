@@ -5,8 +5,6 @@ package com.cburch.logisim.std.gates;
 
 import java.awt.Graphics;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.instance.InstancePainter;
 import com.cburch.logisim.instance.InstanceState;
@@ -47,15 +45,6 @@ class NandGate extends AbstractGate {
 	protected Value computeOutput(Value[] inputs, int numInputs,
 			InstanceState state) {
 		return GateFunctions.computeAnd(inputs, numInputs).not();
-	}
-
-	@Override
-	protected Expression computeExpression(Expression[] inputs, int numInputs) {
-		Expression ret = inputs[0];
-		for (int i = 1; i < numInputs; i++) {
-			ret = Expressions.and(ret, inputs[i]);
-		}
-		return Expressions.not(ret);
 	}
 
 	@Override

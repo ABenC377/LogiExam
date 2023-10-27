@@ -9,9 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.cburch.logisim.analyze.model.Expression;
-import com.cburch.logisim.analyze.model.Expressions;
-import com.cburch.logisim.circuit.ExpressionComputer;
 import com.cburch.logisim.data.AbstractAttributeSet;
 import com.cburch.logisim.data.Attribute;
 import com.cburch.logisim.data.AttributeSet;
@@ -88,22 +85,7 @@ public class Constant extends InstanceFactory {
 			fireAttributeValueChanged(attr, value);
 		}       
 	}
-	
-	private static class ConstantExpression implements ExpressionComputer {
-		private Instance instance;
-		
-		public ConstantExpression(Instance instance) {
-			this.instance = instance;
-		}
-		
-		public void computeExpression(Map<Location,Expression> expressionMap) {
-			AttributeSet attrs = instance.getAttributeSet();
-			int intValue = attrs.getValue(ATTR_VALUE).intValue();
 
-			expressionMap.put(instance.getLocation(),
-					Expressions.constant(intValue));
-		}
-	}
 	
 	public Constant() {
 		super("Constant", Strings.getter("constantComponent"));
@@ -143,7 +125,6 @@ public class Constant extends InstanceFactory {
 	
 	@Override
 	protected Object getInstanceFeature(Instance instance, Object key) {
-		if (key == ExpressionComputer.class) return new ConstantExpression(instance);
 		return super.getInstanceFeature(instance, key);
 	}
 
