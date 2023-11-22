@@ -16,7 +16,7 @@ import com.cburch.logisim.util.UnmodifiableList;
 abstract class Rectangular extends FillableCanvasObject {
 	private Bounds bounds; // excluding the stroke's width
 	
-	public Rectangular(int x, int y, int w, int h) {
+	protected Rectangular(int x, int y, int w, int h) {
 		bounds = Bounds.create(x, y, w, h);
 	}
 	

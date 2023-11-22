@@ -13,7 +13,7 @@ public abstract class Attribute<V> {
 	private String name;
 	private StringGetter disp;
 
-	public Attribute(String name, StringGetter disp) {
+	protected Attribute(String name, StringGetter disp) {
 		this.name = name;
 		this.disp = disp;
 	}

@@ -52,11 +52,11 @@ public abstract class InstanceFactory extends AbstractComponentFactory {
 	private Class<? extends InstancePoker> pokerClass;
 	private Class<? extends InstanceLogger> loggerClass;
 	
-	public InstanceFactory(String name) {
+	protected InstanceFactory(String name) {
 		this(name, StringUtil.constantGetter(name));
 	}
 	
-	public InstanceFactory(String name, StringGetter displayName) {
+	protected InstanceFactory(String name, StringGetter displayName) {
 		this.name = name;
 		this.displayName = displayName;
 		this.iconName = null;

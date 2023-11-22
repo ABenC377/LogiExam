@@ -27,11 +27,11 @@ public abstract class EditPopup extends JPopupMenu {
 	private Listener listener;
 	private Map<LogisimMenuItem, JMenuItem> items;
 	
-	public EditPopup() {
+	protected EditPopup() {
 		this(false);
 	}
 	
-	public EditPopup(boolean waitForInitialize) {
+	protected EditPopup(boolean waitForInitialize) {
 		listener = new Listener();
 		items = new HashMap<LogisimMenuItem, JMenuItem>();
 		if (!waitForInitialize) initialize();

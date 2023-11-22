@@ -14,12 +14,12 @@ import com.cburch.logisim.proj.Project;
 abstract class OptionsPanel extends JPanel {
 	private OptionsFrame optionsFrame;
 	
-	public OptionsPanel(OptionsFrame frame) {
+	protected OptionsPanel(OptionsFrame frame) {
 		super();
 		this.optionsFrame = frame;
 	}
 	
-	public OptionsPanel(OptionsFrame frame, LayoutManager manager) {
+	protected OptionsPanel(OptionsFrame frame, LayoutManager manager) {
 		super(manager);
 		this.optionsFrame = frame;
 	}

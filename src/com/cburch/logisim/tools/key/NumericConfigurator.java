@@ -19,11 +19,11 @@ public abstract class NumericConfigurator<V> implements KeyConfigurator, Cloneab
 	private int modsEx;
 	private long whenTyped;
 	
-	public NumericConfigurator(Attribute<V> attr, int min, int max, int modifiersEx) {
+	protected NumericConfigurator(Attribute<V> attr, int min, int max, int modifiersEx) {
 		this(attr, min, max, modifiersEx, 10);
 	}
 	
-	public NumericConfigurator(Attribute<V> attr, int min, int max,
+	protected NumericConfigurator(Attribute<V> attr, int min, int max,
 			int modifiersEx, int radix) {
 		this.attr = attr;
 		this.minValue = min;

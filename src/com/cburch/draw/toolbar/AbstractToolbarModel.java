@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class AbstractToolbarModel implements ToolbarModel {
 	private List<ToolbarModelListener> listeners;
 
-	public AbstractToolbarModel() {
+	protected AbstractToolbarModel() {
 		listeners = new ArrayList<ToolbarModelListener>();
 	}
 	

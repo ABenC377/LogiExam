@@ -12,12 +12,12 @@ import com.cburch.logisim.proj.Project;
 abstract class LogPanel extends JPanel {
 	private LogFrame logFrame;
 	
-	public LogPanel(LogFrame frame) {
+	protected LogPanel(LogFrame frame) {
 		super();
 		this.logFrame = frame;
 	}
 	
-	public LogPanel(LogFrame frame, LayoutManager manager) {
+	protected LogPanel(LogFrame frame, LayoutManager manager) {
 		super(manager);
 		this.logFrame = frame;
 	}

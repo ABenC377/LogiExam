@@ -23,7 +23,7 @@ public abstract class ManagedComponent extends AbstractComponent {
 	private List<EndData> endsView;
 	private Bounds bounds = null;
 
-	public ManagedComponent(Location loc, AttributeSet attrs, int num_ends) {
+	protected ManagedComponent(Location loc, AttributeSet attrs, int num_ends) {
 		this.loc = loc;
 		this.attrs = attrs;
 		this.ends = new ArrayList<EndData>(num_ends);

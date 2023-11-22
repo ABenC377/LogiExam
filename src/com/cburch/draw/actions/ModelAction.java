@@ -13,7 +13,7 @@ import com.cburch.draw.undo.Action;
 public abstract class ModelAction extends Action {
 	private CanvasModel model;
 	
-	public ModelAction(CanvasModel model) {
+	protected ModelAction(CanvasModel model) {
 		this.model = model;
 	}
 	

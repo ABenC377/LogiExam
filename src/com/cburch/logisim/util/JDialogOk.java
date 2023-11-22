@@ -43,12 +43,12 @@ public abstract class JDialogOk extends JDialog {
 	protected JButton ok = new JButton(Strings.get("dlogOkButton"));
 	protected JButton cancel = new JButton(Strings.get("dlogCancelButton"));
 
-	public JDialogOk(Dialog parent, String title, boolean model) {
+	protected JDialogOk(Dialog parent, String title, boolean model) {
 		super(parent, title, true);
 		configure();
 	}
 
-	public JDialogOk(Frame parent, String title, boolean model) {
+	protected JDialogOk(Frame parent, String title, boolean model) {
 		super(parent, title, true);
 		configure();
 	}
