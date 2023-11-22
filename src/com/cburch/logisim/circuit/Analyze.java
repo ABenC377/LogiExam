@@ -24,7 +24,6 @@ import com.cburch.logisim.proj.Project;
 import com.cburch.logisim.std.wiring.Pin;
 
 public class Analyze {
-	private static final int MAX_ITERATIONS = 100;
 	
 	private Analyze() { }
 	
