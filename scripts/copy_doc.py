@@ -55,7 +55,7 @@ def _find_image_paths(locale_src, en_src):
     return image_paths
 
 def _handle_tag(image_paths_xx, image_paths_en, cwd, xx_src, en_src):
-    img_attr_re = re.compile('\s([a-zA-Z0-9-]+)="?([^"> \r\n\t]+)"?', re.MULTILINE | re.DOTALL)
+    img_attr_re = re.compile(r'\s([a-zA-Z0-9-]+)="?([^"> \r\n\t]+)"?', re.MULTILINE | re.DOTALL)
     def handle_tag(match):
         tag_name = 'img'
         pieces = ['<' + tag_name]
