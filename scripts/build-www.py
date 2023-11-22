@@ -3,9 +3,6 @@
 import os
 import re
 import shutil
-import sys
-import xml.dom
-import xml.dom.minidom
 from logisim_script import *
 
 dst_path = os.getcwd()
