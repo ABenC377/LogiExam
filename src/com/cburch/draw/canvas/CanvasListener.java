@@ -102,7 +102,7 @@ class CanvasListener implements MouseListener, MouseMotionListener, KeyListener,
 	}
 	
 	private boolean isButton1(MouseEvent e) {
-		return (e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0;
+		return (e.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) != 0;
 	}
 	
 	private void handlePopupTrigger(MouseEvent e) {

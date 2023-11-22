@@ -272,7 +272,7 @@ public class EditTool extends Tool {
 		int dx = mx - snapx;
 		int dy = my - snapy;
 		boolean isEligible = dx * dx + dy * dy < 36;
-		if ((mods & MouseEvent.ALT_DOWN_MASK) != 0) isEligible = true;
+		if ((mods & InputEvent.ALT_DOWN_MASK) != 0) isEligible = true;
 		if (!isEligible) {
 			snapx = -1;
 			snapy = -1;
@@ -319,7 +319,7 @@ public class EditTool extends Tool {
 	}
 	
 	private boolean isWiringPoint(Canvas canvas, Location loc, int modsEx) {
-		boolean wiring = (modsEx & MouseEvent.ALT_DOWN_MASK) == 0;
+		boolean wiring = (modsEx & InputEvent.ALT_DOWN_MASK) == 0;
 		boolean select = !wiring;
 		
 		if (canvas != null && canvas.getSelection() != null) {

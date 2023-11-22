@@ -79,9 +79,9 @@ class MenuEdit extends Menu {
 		lower.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_DOWN, menuMask));
 		raiseTop.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_UP, menuMask | KeyEvent.SHIFT_DOWN_MASK));
+				KeyEvent.VK_UP, menuMask | InputEvent.SHIFT_DOWN_MASK));
 		lowerBottom.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_DOWN, menuMask | KeyEvent.SHIFT_DOWN_MASK));
+				KeyEvent.VK_DOWN, menuMask | InputEvent.SHIFT_DOWN_MASK));
 
 		add(undo);
 		addSeparator();
