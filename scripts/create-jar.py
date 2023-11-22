@@ -103,7 +103,7 @@ version, copyright = determine_version_info()
 if version is None or copyright is None:
 	sys.exit(-1)
 print('version ' + version + ', (c) ' + copyright)
-	
+
 if bin_dir is None:
 	print('warning: no "-bin" argument provided - will have to compile all sources')
 
@@ -220,7 +220,7 @@ if include_source:
 	print('copying source code')
 	os.mkdir(build_path(temp_dir, 'src'))
 	copytree(build_path(src_dir, 'com'), build_path(temp_dir, 'src/com'))
-	
+
 if include_documentation:
 	print('copying documentation')
 	doc_dst = build_path(temp_dir, 'doc')
@@ -228,7 +228,7 @@ if include_documentation:
 	copy_doc.build_contents(doc_dir, doc_dst)
 	copy_doc.build_map(doc_dir, doc_dst)
 	copy_doc.build_helpset(doc_dir, doc_dst)
-	
+
 	jhindexer = build_path(data_dir, 'javahelp/bin/jhindexer.jar', cygwin=False)
 	os.chdir(doc_dst)
 	for locale in os.listdir(doc_dst):

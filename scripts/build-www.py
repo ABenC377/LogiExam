@@ -102,7 +102,7 @@ for lang, lang_src in languages:
 		if template_body_match is None: print('  ' + lang + ' template: no body' + str(len(template_text)))
 		if template_body_match is not None:
 			template_body = template_body_match.group(1)
-		
+
 	# determine the destination directory
 	if lang == 'en':
 		lang_dst = dst_path
@@ -110,7 +110,7 @@ for lang, lang_src in languages:
 		lang_dst = build_path(dst_path, lang)
 		if not os.path.exists(lang_dst) or os.path.getsize(lang_dst) == 0:
 			os.mkdir(lang_dst)
-	
+
 	# copy each file over
 	for file in os.listdir(lang_src):
 		file_ext_start = file.rindex('.')
