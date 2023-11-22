@@ -16,7 +16,7 @@ abstract class FillableCanvasObject extends AbstractCanvasObject {
 	private Color strokeColor;
 	private Color fillColor;
 	
-	public FillableCanvasObject() {
+	protected FillableCanvasObject() {
 		paintType = DrawAttr.PAINT_STROKE;
 		strokeWidth = 1;
 		strokeColor = Color.BLACK;

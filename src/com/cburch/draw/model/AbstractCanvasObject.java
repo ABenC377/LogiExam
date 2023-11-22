@@ -28,7 +28,7 @@ public abstract class AbstractCanvasObject
 	
 	private EventSourceWeakSupport<AttributeListener> listeners;
 	
-	public AbstractCanvasObject() {
+	protected AbstractCanvasObject() {
 		listeners = new EventSourceWeakSupport<AttributeListener>();
 	}
 	

@@ -79,7 +79,7 @@ public abstract class AttributeSetTableModel
 	private HashMap<Attribute<?>, AttrRow> rowMap;
 	private ArrayList<AttrRow> rows;
 	
-	public AttributeSetTableModel(AttributeSet attrs) {
+	protected AttributeSetTableModel(AttributeSet attrs) {
 		this.attrs = attrs;
 		this.listeners = new ArrayList<AttrTableModelListener>();
 		this.rowMap = new HashMap<Attribute<?>, AttrRow>();

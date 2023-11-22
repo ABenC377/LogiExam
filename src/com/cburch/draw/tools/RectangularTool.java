@@ -23,7 +23,7 @@ abstract class RectangularTool extends AbstractTool {
 	private int lastMouseY;
 	private Bounds currentBounds;
 	
-	public RectangularTool() {
+	protected RectangularTool() {
 		active = false;
 		currentBounds = Bounds.EMPTY_BOUNDS;
 	}

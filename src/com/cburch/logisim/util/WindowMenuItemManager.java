@@ -49,7 +49,7 @@ public abstract class WindowMenuItemManager {
 	private HashMap<WindowMenu,JRadioButtonMenuItem> menuItems
 		= new HashMap<WindowMenu,JRadioButtonMenuItem>();
 	
-	public WindowMenuItemManager(String text, boolean persistent) {
+	protected WindowMenuItemManager(String text, boolean persistent) {
 		this.text = text;
 		this.persistent = persistent;
 		if (persistent) {

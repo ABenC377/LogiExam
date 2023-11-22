@@ -16,7 +16,7 @@ import com.cburch.logisim.data.Location;
 public abstract class AppearanceElement extends AbstractCanvasObject {
 	private Location location;
 	
-	public AppearanceElement(Location location) {
+	protected AppearanceElement(Location location) {
 		this.location = location;
 	}
 	
