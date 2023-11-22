@@ -14,8 +14,8 @@ class ScrollPanel extends LogPanel {
 		super(frame);
 		this.table = new TablePanel(frame);
 		JScrollPane pane = new JScrollPane(table,
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pane.setVerticalScrollBar(table.getVerticalScrollBar());
 		setLayout(new BorderLayout());
 		add(pane);

@@ -322,7 +322,7 @@ public class SelectTool extends Tool {
 	}
 
 	private boolean shouldConnect(Canvas canvas, int modsEx) {
-		boolean shiftReleased = (modsEx & MouseEvent.SHIFT_DOWN_MASK) == 0;
+		boolean shiftReleased = (modsEx & InputEvent.SHIFT_DOWN_MASK) == 0;
 		boolean dflt = AppPreferences.MOVE_KEEP_CONNECT.getBoolean();
 		if (shiftReleased) {
 			return dflt;

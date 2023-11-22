@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 import com.cburch.logisim.data.Bounds;
 
 public class EditableLabel implements Cloneable {
-	public static final int LEFT = JTextField.LEFT;
-	public static final int RIGHT = JTextField.RIGHT;
-	public static final int CENTER = JTextField.CENTER;
+	public static final int LEFT = SwingConstants.LEFT;
+	public static final int RIGHT = SwingConstants.RIGHT;
+	public static final int CENTER = SwingConstants.CENTER;
 	
 	public static final int TOP = 8;
 	public static final int MIDDLE = 9;
