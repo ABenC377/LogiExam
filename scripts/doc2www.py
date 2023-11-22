@@ -107,7 +107,7 @@ for locale in copy_doc.get_doc_locales(src_dir):
 	locale_dst = build_path(dst_dir, locale)
 	if not os.path.exists(locale_dst):
 		os.mkdir(locale_dst)
-			
+
 	# determine how targets correspond to URLs
 	map_target = {}
 	map_url = {}
@@ -115,7 +115,7 @@ for locale in copy_doc.get_doc_locales(src_dir):
 		def __init__(self, target, url):
 			self.target = target
 			self.url = url
-	
+
 	map_text = copy_doc.get_map(locale, src_dir)
 	map_dom = xml.dom.minidom.parseString(map_text)
 	for mapid in map_dom.getElementsByTagName('mapID'):
@@ -128,7 +128,7 @@ for locale in copy_doc.get_doc_locales(src_dir):
 		map_target[target] = node
 		map_url[url] = node
 	map_dom = None
-	
+
 	# determine the table of contents
 	toc_nodes = []
 	def walk_contents(node, ancestors):
@@ -169,11 +169,11 @@ for locale in copy_doc.get_doc_locales(src_dir):
 			depth = len(node.ancestors)
 			if depth == 0: # ignore the root node
 				continue
-			
+
 			while cur_depth > depth:
 				cur_depth -= 1
 				map_lines.append('  ' * cur_depth + '</ul></li>')
-			
+
 			if node.url == url:
 				text_fmt = '<b{text_clss}>{text}</b>'
 			else:
@@ -199,7 +199,7 @@ for locale in copy_doc.get_doc_locales(src_dir):
 			cur_depth -= 1
 			map_lines.append('  ' * cur_depth + '</ul></li>')
 		return '\n'.join(map_lines)
-			
+
 	# create function for translating HTML in source file to HTML in destination
 	re_body_start = re.compile('<body[^>]*>')
 	re_path_dir = re.compile('[^/]*/')
@@ -209,7 +209,7 @@ for locale in copy_doc.get_doc_locales(src_dir):
 		slash = rel_base.rfind('/')
 		if slash >= 0:
 			rel_base = rel_base[:slash]
-		
+
 		if locale == 'en':
 			langhome = rel_base + '/../../..'
 		else:
@@ -220,26 +220,26 @@ for locale in copy_doc.get_doc_locales(src_dir):
 		if head_end_pos >= 0:
 			to_head = head_end.format(rel=rel_base, lang=locale)
 			text = text[:head_end_pos] + to_head + '\n' + text[head_end_pos:]
-			
+
 		body_start_match = re_body_start.search(text)
 		if body_start_match:
 			body_start_pos = body_start_match.end()
-			
+
 			to_body = body_start.format(rel=rel_base, map=map, lang=locale,
 				langhome=langhome)
 			text = text[:body_start_pos] + '\n' + to_body + text[body_start_pos:]
-			
+
 		body_end_pos = text.find('</body>')
 		if body_end_pos >= 0:
 			to_body = body_end.format(rel=rel_base, map=map, lang=locale,
 				langhome=langhome)
 			text = text[:body_end_pos] + to_body + '\n' + text[body_end_pos:]
-			
+
 		return text
-	
+
 	# copy the files over
 	print('creating files [' + locale + ']')
 	copy_doc.copy_files(locale, src_dir, dst_dir, translate_html=wrap_html,
 					confirm_replace=confirm_replace)
-	
+
 print('file generation complete')

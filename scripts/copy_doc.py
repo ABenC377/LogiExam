@@ -13,7 +13,7 @@ def get_doc_locales(src_dir):
                 and os.path.exists(contents_src)):
             doc_locales.append(locale)
     return doc_locales
-            
+
 def _get_png_dimension(png_path):
     with open(png_path, 'rb') as png_file:
         header = png_file.read(64)
@@ -62,7 +62,7 @@ def _handle_tag(image_paths_xx, image_paths_en, cwd, xx_src, en_src):
         handled_attrs = ['src', 'width', 'height']
         src_attr = 'src'
         tag_end = '>'
-        
+
         values = {}
         for attr_match in img_attr_re.finditer(match.group()):
             attr = attr_match.group(1)
@@ -115,7 +115,7 @@ def copy_files(locale, src_dir, dst_dir, translate_html=None,
     image_paths_en = _find_image_paths(en_src, en_src)
     image_paths_locale = _find_image_paths(locale_src, en_src)    
     img_re = re.compile(r'<img\s[^>]*>', re.MULTILINE | re.DOTALL)
-    
+
     for base_src, dirs, files in os.walk(locale_src):
         base_rel = os.path.relpath(base_src, locale_src)
         base_dst = build_path(locale_dst, base_rel)
@@ -166,7 +166,7 @@ def copy_files_all_locales(src_dir, dst_dir):
         os.mkdir(dst_dir)
     for locale in get_doc_locales(src_dir):
         copy_files(locale, src_dir, dst_dir)
-                    
+
 def get_contents(locale, src_dir):
     re_contents = re.compile(r'<a [^>]*id="([^"]*)">([^<]*)</a>')
     locales = [locale]
@@ -187,7 +187,7 @@ def get_contents(locale, src_dir):
             ids_locale = ids
         if loc == 'en':
             ids_en = ids 
-        
+
     re_tocitem = re.compile('(<tocitem[^>]*target=")([^"]*)(")([^>]*>)')
 
     def tocitem_repl(match):
@@ -195,21 +195,21 @@ def get_contents(locale, src_dir):
         target = match.group(2)
         target_post = match.group(3)
         tocitem_end = match.group(4)
-        
+
         if target in ids_locale:
             text = ' text="' + ids_locale[target] + '"'
         elif target in ids_en:
             text = ' text="' + ids_en[target] + '"'
         else:
             text = target
-        
+
         return target_pre + target + target_post + text + tocitem_end
-                
+
     base_path = build_path(src_dir, 'support/base-contents.xml')
     with open(base_path, encoding='utf-8') as base_file:
         base_text = base_file.read()
     return re_tocitem.sub(tocitem_repl, base_text)
-                    
+
 def get_map(locale, src_dir):
     locales = [locale]
     if locale != 'en':
@@ -227,20 +227,20 @@ def get_map(locale, src_dir):
             urls_locale = urls
         if loc == 'en':
             urls_en = urls
-    
+
     re_mapid = re.compile('(<mapID[^>]*url=")([^"]*)("[^>]*>)')
     def mapid_repl(match):
         url_pre = match.group(1)
         url = match.group(2)
         url_post = match.group(3)
-        
+
         if url in urls_locale:
             url = locale + '/' + url
         elif url in urls_en:
             url = 'en/' + url
-        
+
         return url_pre + url + url_post
-            
+
     base_map = build_path(src_dir, 'support/base-map.jhm')
     with open(base_map, encoding='utf-8') as base_file:
         base_text = base_file.read();
@@ -266,7 +266,7 @@ def build_helpset(src_dir, dst_dir):
     base_helpset = build_path(src_dir, 'support/base-doc.hs')
     with open(base_helpset, encoding='utf-8') as base_file:
         base_text = base_file.read();
-    
+
     re_lang = re.compile('{lang}')
     for locale in get_doc_locales(src_dir):
         helpset_dst = build_path(dst_dir, 'doc_' + locale + '.hs')
@@ -274,4 +274,3 @@ def build_helpset(src_dir, dst_dir):
             helpset_text = re_lang.sub(locale, base_text)
             with open(helpset_dst, 'w', encoding='utf-8') as helpset_file:
                 helpset_file.write(helpset_text)
-                

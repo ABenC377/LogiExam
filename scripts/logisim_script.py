@@ -39,7 +39,7 @@ def is_same_file(a, b):
 
 def system(*args):
 	return os.system(' '.join(args))
-	
+
 def prompt(prompt, accept=None):
 	while True:
 		ret = input(prompt + ' ')

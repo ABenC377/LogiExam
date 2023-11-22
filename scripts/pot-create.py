@@ -17,7 +17,7 @@ keep_temporary = False
 
 if '\\home\\burch\\' in get_svn_dir():
     tar_cmd = 'C:/cygwin/bin/tar.exe'
-    
+
 if 'unichr' not in dir():
     unichr = chr
 
@@ -88,7 +88,7 @@ with open(build_path(dst_dir, 'gui', 'gui.pot'), 'w', encoding='utf-8') as dst:
         dst.write('msgctxt {ctxt}\n'.format(ctxt=key))
         dst.write('msgid "{msgid}"\n'.format(msgid=en_dict[key]))
         dst.write('msgstr "{xlate}"\n'.format(xlate=''))
-        
+
 for lang in known_langs:
     lang_keys, lang_dict = load_lang(lang)
     with open(build_path(dst_dir, 'gui', lang + '.po'), 'w', encoding='utf-8') as dst:
@@ -110,5 +110,5 @@ tarball.close()
 
 if not keep_temporary:
     shutil.rmtree(dst_dir)
-    
+
 print('POT creation completed')
