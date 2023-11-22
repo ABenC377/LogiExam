@@ -76,15 +76,15 @@ def confirm_replace(filename):
 		dispose = prompt('Replace (' + options + ')?', 'yYnNa')
 		if dispose == 'y':
 			return True
-		elif dispose == 'Y':
+		if dispose == 'Y':
 			replace_all = 1
 			return True
-		elif dispose == 'n':
+		if dispose == 'n':
 			return False
-		elif dispose == 'N':
+		if dispose == 'N':
 			replace_all = -1
 			return False
-		elif dispose == 'a':
+		if dispose == 'a':
 			sys.exit('aborted on user request')
 	else:
 		return replace_all >= 0

@@ -10,8 +10,7 @@ def build_path(first, *subdirs, **kwargs):
 			dir = os.path.join(dir, subsub)
 	if 'cygwin' in kwargs and not kwargs['cygwin']:
 		return uncygwin(dir)
-	else:
-		return dir
+	return dir
 
 def get_svn_dir(*subdirs):
 	script_parent = os.path.dirname(sys.path[0])
@@ -25,8 +24,7 @@ def uncygwin(path, verbose=False):
 		elif path.startswith('/'):
 			path = 'C:/cygwin' + path
 		return path
-	else:
-		return path 
+	return path 
 
 def is_same_file(a, b):
 	samefile = getattr(os.path, 'samefile', None)
@@ -34,8 +32,7 @@ def is_same_file(a, b):
 		a_norm = os.path.normcase(os.path.abspath(a))
 		b_norm = os.path.normcase(os.path.abspath(b))
 		return a_norm == b_norm
-	else:
-		return samefile(a, b)
+	return samefile(a, b)
 
 def system(*args):
 	return os.system(' '.join(args))
